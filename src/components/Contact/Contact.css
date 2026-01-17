@@ -1,0 +1,133 @@
+.contact-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    z-index: 40;
+    overflow: hidden;
+}
+
+
+.contact-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    background: transparent;
+    pointer-events: none;
+}
+
+
+.contact-text-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+
+.contact-title {
+    font-family: 'Anton', 'Impact', sans-serif;
+    font-size: 15vw;
+
+    color: #fff;
+    line-height: 1;
+    margin: 0;
+    letter-spacing: 1vw;
+}
+
+.contact-details {
+    margin-top: 2rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 2vw;
+    color: #888;
+}
+
+.email-link {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.email-link:hover {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+
+.contact-socials {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-icon {
+    font-size: 4vw;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.icon-linkedin:hover {
+    color: #0077b5;
+    filter: drop-shadow(0 0 15px #0077b5);
+    transform: scale(1.1);
+}
+
+
+.icon-github:hover {
+    color: #ffffff;
+    filter: drop-shadow(0 0 15px #ffffff);
+    transform: scale(1.1);
+}
+
+
+.icon-instagram:hover {
+    color: #E1306C;
+    filter: drop-shadow(0 0 15px #E1306C);
+    transform: scale(1.1);
+}
+
+@media screen and (max-width: 768px) {
+    .contact-details {
+        font-size: 1.5rem;
+    }
+
+    .social-icon {
+        font-size: 3rem;
+    }
+
+    .contact-socials {
+        gap: 2rem;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .contact-details {
+        font-size: 2.5rem;
+        /* Larger than desktop */
+    }
+
+    .social-icon {
+        font-size: 5rem;
+        /* Larger than desktop */
+    }
+
+    .contact-socials {
+        gap: 3rem;
+    }
+}

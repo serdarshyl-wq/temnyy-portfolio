@@ -1,0 +1,179 @@
+.home-container {
+    width: 100%;
+    height: 100vh;
+
+    color: #ffffff;
+    display: block;
+    position: relative;
+    z-index: 10;
+
+}
+
+.hero-section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    align-items: center;
+
+    position: relative;
+
+    z-index: 20;
+    mix-blend-mode: difference;
+    color: #fff;
+}
+
+
+.sticky-bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    filter: url(#goo);
+
+    background: #000;
+    opacity: 1;
+}
+
+.bg-panel {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 55%;
+
+}
+
+.bg-left {
+    left: 100%;
+
+    background: #ffffff;
+    z-index: 1;
+}
+
+.bg-right {
+    right: 0;
+    background: #000000;
+    z-index: 1;
+}
+
+.fluid-blob {
+    position: absolute;
+    top: 50%;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    opacity: 0;
+
+}
+
+.blob-white {
+    background: #ffffff;
+}
+
+.blob-black {
+    background: #000000;
+}
+
+
+.hero-top {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 12vw;
+
+    box-sizing: border-box;
+    position: relative;
+
+    overflow: visible;
+}
+
+
+
+.hero-text-row {
+    position: relative;
+
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 0.9;
+    align-items: baseline;
+
+}
+
+.swapping-c-container {
+    position: relative;
+    display: inline-block;
+
+    height: 1em;
+    overflow: hidden;
+
+}
+
+.distort-char {
+    display: inline-block;
+
+    transform-origin: center center;
+    will-change: transform, color, text-shadow;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+.creative-row {
+    font-size: 19vw;
+
+    margin-bottom: 0px;
+    display: flex;
+    align-items: baseline;
+
+}
+
+.swapping-c-container {
+    position: relative;
+    display: inline-block;
+    height: 1em;
+    overflow: hidden;
+
+}
+
+.swapping-c-container .distort-char {
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 1;
+}
+
+.swapping-c-container .distort-char:nth-child(1) {
+    position: relative;
+    z-index: 2;
+}
+
+.swapping-c-container .distort-char:nth-child(2) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.role-row {
+    font-size: 7.8vw;
+
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.spacer {
+    width: 2vw;
+
+}
