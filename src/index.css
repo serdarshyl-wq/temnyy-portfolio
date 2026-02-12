@@ -34,12 +34,11 @@ h1 {
 }
 
 @media (hover: hover) and (pointer: fine) {
-    button {
-        cursor: none;
-    }
 
-    a,
+    html,
+    body,
     button,
+    a,
     input,
     textarea,
     .clickable,
