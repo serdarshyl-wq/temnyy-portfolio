@@ -1,0 +1,28 @@
+.custom-scrollbar-track {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 100vh;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    pointer-events: none;
+
+    transform: translateX(20px);
+}
+
+.custom-scrollbar-thumb {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6px;
+    margin-right: 2px;
+    background-color: #fff;
+    border-radius: 3px;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+.custom-scrollbar-track:hover .custom-scrollbar-thumb {
+    opacity: 1;
+}

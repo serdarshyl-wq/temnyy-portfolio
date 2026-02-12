@@ -1,193 +1,158 @@
 .work-section {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
-    z-index: 30;
-    overflow: hidden;
-
-}
-
-.work-static-dots {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 0;
     background-color: #000;
-    background-image: radial-gradient(#333 1px, transparent 1px);
-    background-size: 20px 20px;
-    pointer-events: none;
-}
-
-.work-rows-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
-    gap: 0;
+    color: #fff;
     z-index: 10;
-    perspective: 2500px;
     overflow: hidden;
-    transform-style: preserve-3d;
-    transform-origin: 50% 50% 1500px;
 }
 
-.work-char-row {
+.work-split-container {
     position: relative;
-    width: 100vw;
-    height: 20vh;
+    z-index: 2;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    transform-style: preserve-3d;
-    transform-origin: 50% 50% 1500px;
-}
-
-
-.work-char {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #fff;
-    font-size: 20vh;
-    font-weight: 900;
-    line-height: 0.8;
-    font-family: 'Impact', 'Anton', sans-serif;
-    white-space: nowrap;
-    opacity: 0;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    transform-origin: 50% 50% 1500px;
-    backface-visibility: visible;
-}
-
-.work-char:nth-child(30) {
-    opacity: 1;
-    z-index: 100;
-}
-
-
-.work-projects-track {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding-left: 100vw;
-    gap: 10vw;
-    z-index: 50;
-    pointer-events: none;
+    height: auto;
+    min-height: 0;
+    padding-top: 150px;
+    padding-bottom: 150px;
+    box-sizing: border-box;
 }
 
-
-.monitor-card {
-    position: relative;
-    width: 40vw;
-    aspect-ratio: 16 / 9;
-    flex-shrink: 0;
+.work-left,
+.work-right {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    pointer-events: auto;
 }
 
-.monitor-card:nth-child(odd) {
-    transform: translateY(-20vh);
-}
-
-.monitor-card:nth-child(even) {
-    transform: translateY(20vh);
-}
-
-.monitor-frame {
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border: 0.5vh solid #222;
-    border-radius: 0.5vh;
-    box-shadow: 0 0 10vh rgba(0, 0, 0, 0.8);
-    position: relative;
-    overflow: hidden;
-}
-
-.monitor-screen {
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.coming-soon-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Anton', 'Impact', sans-serif;
-    font-weight: 900;
-    font-size: 5vw;
-    color: #fff;
-    letter-spacing: 0.5vw;
-    line-height: 1.1;
-}
-
-.coming-row,
-.soon-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.work-swap-container {
-    position: relative;
-    display: inline-flex;
-    justify-content: center;
-    width: 0.8em;
-    width: 0.8em;
-
-    height: 1em;
-    overflow: hidden;
-}
-
-.work-o-1,
-.work-o-2 {
-    display: block;
-    line-height: 1;
-    position: absolute;
+.work-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding-left: 0;
     width: 100%;
     text-align: center;
 }
 
-.project-title,
-.coming-soon {
-    display: none;
-}
-
-
-.project-link {
-    display: block;
+.project-list {
     width: 100%;
-    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-.project-image {
+.work-separator {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 0;
+}
+
+.project-item {
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 2rem 0;
+    cursor: none;
+    transition: color 0.3s ease;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    text-decoration: none;
+    color: #fff;
+    overflow: hidden;
+}
+
+.project-item .project-name {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.project-item:hover .project-name {
+    color: #fff;
+    padding-left: 3rem;
+    transition: padding-left 0.3s ease;
+}
+
+.project-video-container {
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    margin-top: 0;
+    background-color: #000;
+    will-change: height;
+}
+
+.project-video-container.active {
+    height: 500px;
+    width: 100%;
+    margin: 2rem 0 0 0;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+}
+
+.project-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top;
+    border-radius: 8px;
     display: block;
+    will-change: transform, opacity;
+}
+
+@media screen and (max-width: 768px) {
+    .work-split-container {
+        flex-direction: column-reverse;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .work-title {
+        font-size: 2rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .project-item {
+        font-size: 1.5rem;
+        padding: 1.5rem 0;
+    }
+
+    .project-item .project-name {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .project-video-container.active {
+        height: 250px;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .work-split-container {
+        flex-direction: column-reverse;
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .work-title {
+        font-size: 2.5rem;
+    }
+
+    .project-item {
+        font-size: 1.8rem;
+    }
+
+    .project-video-container.active {
+        height: 400px;
+        width: 100%;
+        max-width: 100%;
+    }
 }

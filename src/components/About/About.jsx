@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import { SiHtml5, SiCss3, SiJavascript, SiReact, SiGreensock } from 'react-icons/si';
+import gsap from 'gsap';
 import './About.css';
 
 const About = () => {
+    const containerRef = useRef(null);
     const icons = [
         { Icon: SiHtml5, name: 'HTML5' },
         { Icon: SiCss3, name: 'CSS3' },
@@ -11,8 +13,36 @@ const About = () => {
         { Icon: SiGreensock, name: 'GSAP' }
     ];
 
+    useLayoutEffect(() => {
+        let ctx = gsap.context(() => {
+            const aboutSwapTl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
+            const a1 = ".a-1", a2 = ".a-2";
+            const o1 = ".o-1", o2 = ".o-2";
+            const e1 = ".e-1", e2 = ".e-2";
+
+            gsap.set(a2, { xPercent: -100 });
+            gsap.set(o2, { yPercent: -100 });
+            gsap.set(e2, { yPercent: 100 });
+
+            aboutSwapTl.addLabel("swap1", 0)
+                .to(a1, { xPercent: 100, duration: 0.8, ease: "power3.inOut" }, "swap1")
+                .to(a2, { xPercent: 0, duration: 0.8, ease: "power3.inOut" }, "swap1")
+                .to(o1, { yPercent: 100, duration: 0.8, ease: "power3.inOut" }, "swap1")
+                .to(o2, { yPercent: 0, duration: 0.8, ease: "power3.inOut" }, "swap1")
+                .set(a1, { xPercent: 0 }).set(a2, { xPercent: -100 })
+                .set(o1, { yPercent: 0 }).set(o2, { yPercent: -100 });
+
+            aboutSwapTl.addLabel("swap2", 1)
+                .to(e1, { yPercent: -100, duration: 0.8, ease: "power3.inOut" }, "swap2")
+                .to(e2, { yPercent: 0, duration: 0.8, ease: "power3.inOut" }, "swap2")
+                .set(e1, { yPercent: 0 }).set(e2, { yPercent: 100 });
+        }, containerRef);
+
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <div className="about-container">
+        <div className="about-container" ref={containerRef}>
 
             <h2 className="about-title">
                 <div className="swapping-c-container">
@@ -68,4 +98,4 @@ const About = () => {
     );
 };
 
-export default About;
+export default React.memo(About);

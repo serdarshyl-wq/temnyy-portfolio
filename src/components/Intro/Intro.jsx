@@ -5,8 +5,6 @@ import './Intro.css';
 const Intro = ({ onComplete }) => {
     const mainTextRef = useRef(null);
     const subTextWrapperRef = useRef(null);
-
-
     const splitText = (text) => {
         return text.split('').map((char, index) => (
             <span key={index} className="char" style={{ display: 'inline-block' }}>
@@ -18,8 +16,6 @@ const Intro = ({ onComplete }) => {
     useEffect(() => {
         const ctx = gsap.context(() => {
             const tl = gsap.timeline();
-
-
             tl.fromTo(".main-text .char",
                 { y: 150, opacity: 0 },
                 {
@@ -30,8 +26,6 @@ const Intro = ({ onComplete }) => {
                     ease: "power4.out"
                 }
             );
-
-
             tl.fromTo(".sub-text .char",
                 { y: 50, opacity: 0 },
                 {
@@ -43,8 +37,6 @@ const Intro = ({ onComplete }) => {
                 },
                 "+=0.1"
             );
-
-
             tl.to(mainTextRef.current, {
                 yPercent: -100,
                 duration: 0.8,
@@ -61,7 +53,6 @@ const Intro = ({ onComplete }) => {
 
         return () => ctx.revert();
     }, [onComplete]);
-
     return (
         <div className="intro-container" ref={mainTextRef}>
             <div className="content-wrapper">
@@ -71,7 +62,6 @@ const Intro = ({ onComplete }) => {
                         {splitText("TEMNYY")}
                     </div>
                 </div>
-
 
                 <div className="sub-text-column" ref={subTextWrapperRef}>
                     <div className="sub-text-line">

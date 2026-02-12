@@ -1,55 +1,49 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
+import { FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { FaLinkedin, FaGithub, FaInstagram } from 'react-icons/fa';
+import SectionBackground from '../Shared/SectionBackground';
 import './Contact.css';
 
-const Contact = ({ timeline }) => {
+gsap.registerPlugin(ScrollTrigger);
 
-    useEffect(() => {
-        if (!timeline) return;
-
-
-
-
-        const overlapTiming = "-=70";
-
-
-        timeline.set(".contact-char", { x: "-150vw", opacity: 1 }, overlapTiming);
-        timeline.set(".contact-section", { autoAlpha: 1 }, overlapTiming);
-
-
-
-
-        timeline.to(".contact-char", {
-            x: 0,
-            duration: 120,
-            ease: "power2.out",
-            stagger: 2
-        }, overlapTiming);
-
-
-        timeline.fromTo([".contact-details", ".contact-socials"],
-            { autoAlpha: 0, y: 20 },
-            { autoAlpha: 1, y: 0, duration: 40, ease: "power2.out" },
-            "-=20"
-        );
-
-
-        timeline.addLabel("contact");
-
-        ScrollTrigger.refresh();
-
-    }, [timeline]);
-
-
+const Contact = () => {
+    const sectionRef = useRef(null);
+    const titleRef = useRef(null);
     const text = "CONTACT";
 
+    useLayoutEffect(() => {
+        const ctx = gsap.context(() => {
+            const chars = titleRef.current.querySelectorAll('.contact-char');
+
+            gsap.fromTo(chars,
+                {
+                    x: "-100vw", // Start off-screen left
+                    opacity: 0
+                },
+                {
+                    x: 0,
+                    opacity: 1,
+                    stagger: 0.05,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: "top bottom", // Start when top of section hits bottom of viewport
+                        end: "center center", // End when center of section hits center of viewport
+                        scrub: 1 // Smooth scrubbing
+                    }
+                }
+            );
+        }, sectionRef);
+
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <div className="contact-section">
-            <div className="contact-bg"></div>
+        <div className="contact-section" ref={sectionRef}>
+            <SectionBackground />
             <div className="contact-text-container">
-                <h1 className="contact-title">
+                <h1 className="contact-title" ref={titleRef}>
                     {text.split("").map((char, i) => (
                         <span key={i} className="contact-char" style={{ display: 'inline-block' }}>{char}</span>
                     ))}

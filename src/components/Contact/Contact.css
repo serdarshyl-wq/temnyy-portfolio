@@ -1,40 +1,24 @@
 .contact-section {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    visibility: hidden;
-    z-index: 40;
+    z-index: 10;
     overflow: hidden;
+    background-color: #000;
 }
-
-
-.contact-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
-    background: transparent;
-    pointer-events: none;
-}
-
 
 .contact-text-container {
     position: relative;
-    z-index: 1;
+    z-index: 10;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
 }
-
 
 .contact-title {
     font-family: 'Anton', 'Impact', sans-serif;
@@ -79,6 +63,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #fff;
+    transition: all 0.3s ease;
 }
 
 
@@ -103,31 +89,71 @@
 }
 
 @media screen and (max-width: 768px) {
+    .contact-section {
+        min-height: 70vh;
+        padding-bottom: 10vh;
+    }
+
+    .contact-title {
+        font-size: 22vw;
+    }
+
     .contact-details {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 
     .social-icon {
-        font-size: 3rem;
+        font-size: 4rem;
     }
 
     .contact-socials {
         gap: 2rem;
     }
+
+    .contact-text-container {
+        transform: translateY(-15vh);
+    }
 }
 
 @media screen and (min-width: 769px) and (max-width: 1024px) {
+    .contact-section {
+        min-height: 60vh;
+        align-items: flex-start;
+        padding-top: 15vh;
+    }
+
+    .contact-text-container {
+        transform: translateY(0);
+        margin-top: 0;
+        width: 100%;
+        align-items: center;
+        text-align: center;
+        padding-left: 0;
+    }
+
+    .contact-title {
+        font-size: 20vw;
+        margin-left: 0;
+        text-align: center;
+        width: 100%;
+    }
+
     .contact-details {
         font-size: 2.5rem;
-        /* Larger than desktop */
+        margin-left: 0;
+        text-align: center;
+        width: 100%;
     }
 
     .social-icon {
-        font-size: 5rem;
-        /* Larger than desktop */
+        font-size: 4.5rem;
     }
 
     .contact-socials {
-        gap: 3rem;
+        gap: 2.5rem;
+        margin-top: 2rem;
+        margin-left: 0;
+        justify-content: center;
+        width: 100%;
     }
 }

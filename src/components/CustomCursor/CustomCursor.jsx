@@ -4,26 +4,50 @@ import './CustomCursor.css';
 
 const CustomCursor = () => {
     const cursorRef = useRef(null);
-    const [hoverTarget, setHoverTarget] = useState(null);
     const hoverTargetRef = useRef(null);
     const activeRectRef = useRef(null);
 
-    useEffect(() => {
-        hoverTargetRef.current = hoverTarget;
-    }, [hoverTarget]);
+    const [hoverTarget, setHoverTarget] = useState(null);
+    const [isMobile, setIsMobile] = useState(false);
+    const [cursorText, setCursorText] = useState("");
 
     useEffect(() => {
+        const checkDevice = () => {
+            const isTouchDevice =
+                'ontouchstart' in window ||
+                navigator.maxTouchPoints > 0 ||
+                window.matchMedia('(hover: none)').matches;
+
+            setIsMobile(isTouchDevice);
+        };
+
+        checkDevice();
+        const mql = window.matchMedia('(hover: none)');
+        if (mql.addEventListener) {
+            mql.addEventListener('change', checkDevice);
+        }
+
+        return () => {
+            if (mql.removeEventListener) {
+                mql.removeEventListener('change', checkDevice);
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        if (isMobile) return;
 
         const xTo = gsap.quickTo(cursorRef.current, "x", { duration: 0.1, ease: "power3" });
         const yTo = gsap.quickTo(cursorRef.current, "y", { duration: 0.1, ease: "power3" });
 
         const moveCursor = (e) => {
-            if (hoverTargetRef.current && activeRectRef.current) {
+            const target = hoverTargetRef.current;
+            const isTextHover = target && target.getAttribute('data-cursor-text');
 
+            if (target && activeRectRef.current && !isTextHover) {
                 const rect = activeRectRef.current;
                 const centerX = rect.left + rect.width / 2;
                 const centerY = rect.top + rect.height / 2;
-
 
                 const magneticX = centerX + (e.clientX - centerX) * 0.2;
                 const magneticY = centerY + (e.clientY - centerY) * 0.2;
@@ -37,26 +61,19 @@ const CustomCursor = () => {
         };
 
         const handleMouseOver = (e) => {
-
-            const target = e.target.closest('.clickable') ||
-                e.target.closest('a') ||
-                e.target.closest('button');
+            const target = e.target.closest('.clickable') || e.target.closest('a') || e.target.closest('button');
             if (target) {
                 setHoverTarget(target);
+                hoverTargetRef.current = target;
             }
         };
 
         const handleMouseOut = (e) => {
-
-
-            const target = e.target.closest('.clickable') ||
-                e.target.closest('a') ||
-                e.target.closest('button');
-
+            const target = e.target.closest('.clickable') || e.target.closest('a') || e.target.closest('button');
             if (target && target === hoverTargetRef.current) {
-
                 if (!target.contains(e.relatedTarget)) {
                     setHoverTarget(null);
+                    hoverTargetRef.current = null;
                 }
             }
         };
@@ -70,53 +87,46 @@ const CustomCursor = () => {
             window.removeEventListener('mouseover', handleMouseOver);
             window.removeEventListener('mouseout', handleMouseOut);
         };
-    }, []);
-
+    }, [isMobile]);
 
     useEffect(() => {
+        if (isMobile) return;
+
         if (hoverTarget) {
             const rect = hoverTarget.getBoundingClientRect();
-            activeRectRef.current = rect;
-
+            const text = hoverTarget.getAttribute('data-cursor-text');
+            activeRectRef.current = text ? null : rect;
+            setCursorText(text || "");
 
             let targetRadius = "4px";
-
             if (hoverTarget.classList.contains('icon-github')) {
-
                 targetRadius = "50%";
-            } else if (hoverTarget.classList.contains('icon-linkedin')) {
-
-                targetRadius = "0px";
-            } else if (hoverTarget.classList.contains('icon-instagram')) {
-
-                targetRadius = "20px";
-            } else if (hoverTarget.classList.contains('social-icon') || hoverTarget.classList.contains('circle-cursor')) {
-
+            } else if (hoverTarget.classList.contains('icon-linkedin') || hoverTarget.classList.contains('icon-instagram') || hoverTarget.classList.contains('social-icon')) {
+                targetRadius = "10px";
+            } else if (hoverTarget.classList.contains('circle-cursor')) {
+                targetRadius = "50%";
+            } else if (text) {
                 targetRadius = "50%";
             }
 
+            const isTextMode = !!text;
+            const textWidth = 140;
+            const textHeight = 40;
 
             gsap.to(cursorRef.current, {
-                width: rect.width,
-                height: rect.height,
-                borderRadius: targetRadius,
-                backgroundColor: "#000",
-                border: "1px solid #fff",
-                duration: 0.2,
+                width: isTextMode ? textWidth : rect.width,
+                height: isTextMode ? textHeight : rect.height,
+                borderRadius: isTextMode ? "20px" : targetRadius,
+                backgroundColor: isTextMode ? "#fff" : "#000",
+                border: isTextMode ? "none" : "1px solid #fff",
+                mixBlendMode: isTextMode ? "normal" : "difference",
+                duration: 0.15,
                 ease: "power2.out",
                 overwrite: 'auto'
             });
-
-
-            gsap.fromTo(cursorRef.current,
-                { clipPath: "inset(0 100% 0 0)" },
-                { clipPath: "inset(0 0% 0 0)", duration: 0.3, ease: "power2.out" }
-            );
-
         } else {
             activeRectRef.current = null;
-
-
+            setCursorText("");
 
             gsap.to(cursorRef.current, {
                 width: 20,
@@ -127,13 +137,18 @@ const CustomCursor = () => {
                 clipPath: "inset(0 0% 0 0)",
                 duration: 0.2,
                 ease: "power2.out",
-                overwrite: 'auto'
+                overwrite: 'auto',
+                mixBlendMode: "normal"
             });
         }
-    }, [hoverTarget]);
+    }, [hoverTarget, isMobile]);
+
+    if (isMobile) return null;
 
     return (
-        <div ref={cursorRef} className="custom-cursor"></div>
+        <div ref={cursorRef} className={`custom-cursor ${cursorText ? 'has-text' : ''}`}>
+            {cursorText && <span className="cursor-text-content">{cursorText}</span>}
+        </div>
     );
 };
 
