@@ -33,6 +33,7 @@ const Work = forwardRef((props, ref) => {
         videos.forEach(video => {
             const container = video.closest('.project-video-container');
             if (container && container.classList.contains('active')) {
+                video.load();
                 video.play().catch(err => console.log("Video play interrupted", err));
             } else {
                 video.pause();
@@ -79,7 +80,7 @@ const Work = forwardRef((props, ref) => {
                                     loop
                                     muted
                                     playsInline
-                                    preload="metadata"
+                                    preload="none"
                                     className="project-video nike-video"
                                 />
                             </div>
@@ -111,7 +112,7 @@ const Work = forwardRef((props, ref) => {
                                     loop
                                     muted
                                     playsInline
-                                    preload="metadata"
+                                    preload="none"
                                     className="project-video"
                                 />
                             </div>
@@ -136,7 +137,7 @@ const Work = forwardRef((props, ref) => {
                                     loop
                                     muted
                                     playsInline
-                                    preload="metadata"
+                                    preload="none"
                                     className="project-video"
                                 />
                             </div>

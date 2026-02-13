@@ -66,3 +66,11 @@
 .opacity-80 {
     opacity: 0.8;
 }
+
+@media screen and (max-width: 768px) {
+    .blob {
+        width: 30vw;
+        height: 18vw;
+        filter: blur(30px);
+    }
+}

@@ -95,7 +95,7 @@
     }
 
     .contact-title {
-        font-size: 22vw;
+        font-size: 15vw;
     }
 
     .contact-details {
@@ -111,7 +111,7 @@
     }
 
     .contact-text-container {
-        transform: translateY(-15vh);
+        transform: translateY(5vh);
     }
 }
 

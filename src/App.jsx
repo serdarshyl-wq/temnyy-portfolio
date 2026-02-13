@@ -38,22 +38,16 @@ function App() {
 
     lenisRef.current = lenis;
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
     lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => {
+    const tickerCallback = (time) => {
       lenis.raf(time * 1000);
-    });
+    };
+    gsap.ticker.add(tickerCallback);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      gsap.ticker.remove(tickerCallback);
       lenis.destroy();
-      gsap.ticker.remove((time) => lenis.raf(time * 1000));
     };
   }, []);
 

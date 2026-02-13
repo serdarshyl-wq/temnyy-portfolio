@@ -8,10 +8,11 @@ gsap.registerPlugin(ScrollTrigger);
 const HeroBackground = forwardRef((props, ref) => {
     const containerRef = useRef(null);
     const blobRefs = useRef([]);
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            const blobs = blobRefs.current;
+            const blobs = blobRefs.current.filter(Boolean);
 
             gsap.set(blobs, {
                 xPercent: -50,
@@ -90,10 +91,14 @@ const HeroBackground = forwardRef((props, ref) => {
                 <div ref={el => blobRefs.current[1] = el} className="blob blob-green z-10"></div>
                 <div ref={el => blobRefs.current[2] = el} className="blob blob-turquoise z-10"></div>
                 <div ref={el => blobRefs.current[3] = el} className="blob blob-green z-10"></div>
-                <div ref={el => blobRefs.current[4] = el} className="blob blob-turquoise z-0 opacity-80"></div>
-                <div ref={el => blobRefs.current[5] = el} className="blob blob-green z-0 opacity-80"></div>
-                <div ref={el => blobRefs.current[6] = el} className="blob blob-turquoise z-0 opacity-80"></div>
-                <div ref={el => blobRefs.current[7] = el} className="blob blob-green z-0 opacity-80"></div>
+                {!isMobile && (
+                    <>
+                        <div ref={el => blobRefs.current[4] = el} className="blob blob-turquoise z-0 opacity-80"></div>
+                        <div ref={el => blobRefs.current[5] = el} className="blob blob-green z-0 opacity-80"></div>
+                        <div ref={el => blobRefs.current[6] = el} className="blob blob-turquoise z-0 opacity-80"></div>
+                        <div ref={el => blobRefs.current[7] = el} className="blob blob-green z-0 opacity-80"></div>
+                    </>
+                )}
             </div>
         </div>
     );

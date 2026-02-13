@@ -40,10 +40,12 @@ const Home = forwardRef(({ startAnim, setNavbarColor, setScrollLocked, lenis }, 
 
     useLayoutEffect(() => {
         let ctx = gsap.context(() => {
+            const isMobile = window.innerWidth <= 768;
+
             gsap.set(".distort-char", {
                 y: -150,
                 opacity: 0,
-                filter: "blur(20px)",
+                filter: isMobile ? "none" : "blur(20px)",
                 scale: 1.2
             });
 
@@ -53,7 +55,7 @@ const Home = forwardRef(({ startAnim, setNavbarColor, setScrollLocked, lenis }, 
                 xPercent: -50,
                 yPercent: -50,
                 scaleX: 0.9,
-                scaleY: window.innerWidth <= 768 ? 2.5 : 0.9
+                scaleY: 0.9
             });
 
             if (startAnim) {
@@ -63,7 +65,7 @@ const Home = forwardRef(({ startAnim, setNavbarColor, setScrollLocked, lenis }, 
                     duration: 1.8,
                     y: 0,
                     opacity: 1,
-                    filter: "blur(0px)",
+                    filter: isMobile ? "none" : "blur(0px)",
                     scale: 1,
                     stagger: { amount: 1, from: "start" },
                     ease: "power4.out",
@@ -73,7 +75,7 @@ const Home = forwardRef(({ startAnim, setNavbarColor, setScrollLocked, lenis }, 
                         opacity: 0.6,
                         y: 0,
                         scaleX: 1,
-                        scaleY: window.innerWidth <= 768 ? 3 : 1,
+                        scaleY: 1,
                         ease: "power3.out"
                     }, "-=1.5")
                     .call(() => {

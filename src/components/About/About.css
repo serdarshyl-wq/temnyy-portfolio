@@ -108,6 +108,8 @@
     gap: 4rem;
     width: fit-content;
     animation: scroll-left 20s linear infinite;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 @keyframes scroll-left {
@@ -135,6 +137,10 @@
 }
 
 @media screen and (max-width: 768px) {
+    .about-container {
+        mix-blend-mode: normal;
+    }
+
     .about-content-row {
         flex-direction: column;
         width: 90%;
