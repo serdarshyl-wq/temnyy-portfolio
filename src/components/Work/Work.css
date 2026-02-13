@@ -129,7 +129,10 @@
     }
 
     .project-video-container.active {
-        height: 250px;
+        height: 200px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        width: calc(100% - 2rem);
     }
 }
 
