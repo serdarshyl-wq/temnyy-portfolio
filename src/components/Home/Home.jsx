@@ -151,6 +151,13 @@ const Home = forwardRef(({ startAnim, setNavbarColor, setScrollLocked, lenis }, 
         };
 
         const handleInteraction = (e) => {
+            const currentScroll = window.scrollY;
+            const vh = window.innerHeight;
+
+            // Only interfere in the hero <-> about transition zone
+            // If user is past about section, let native scroll work
+            if (currentScroll >= vh + 100) return;
+
             if (isLockedAtAbout || animating) {
                 if (e.cancelable) e.preventDefault();
                 return;
@@ -162,9 +169,6 @@ const Home = forwardRef(({ startAnim, setNavbarColor, setScrollLocked, lenis }, 
                 const touchCurrentY = e.touches[0].clientY;
                 deltaY = touchStartY - touchCurrentY;
             }
-
-            const currentScroll = window.scrollY;
-            const vh = window.innerHeight;
 
             if (deltaY > 5 && currentScroll < vh - 50) {
                 if (e.cancelable) e.preventDefault();
